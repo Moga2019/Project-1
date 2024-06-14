@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Fresh Picks </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="auth-container">
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="connection.php" method="post">
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="login-email" name="email" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="login-password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="#" id="register-link">Register here</a></p>
+    </div>
+
+    <div class="register-container" style="display: none;">
+        <h2>Register</h2>
+        <form action="connection.php" method="post">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="register-username" name="username" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="register-email" name="email" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="register-password" name="password" placeholder="Password" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="#" id="login-link">Login here</a></p>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const registerLink = document.getElementById('register-link');
+        const loginLink = document.getElementById('login-link');
+        const loginContainer = document.querySelector('.login-container');
+        const registerContainer = document.querySelector('.register-container');
+
+        registerLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            loginContainer.style.display = 'none';
+            registerContainer.style.display = 'block';
+        });
+
+        loginLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            registerContainer.style.display = 'none';
+            loginContainer.style.display = 'block';
+        });
+    });
+</script>
+
+</body>
+</html>

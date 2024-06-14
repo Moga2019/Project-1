@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Fresh Picks - Contact</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <img src="/Applications/XAMPP/xamppfiles/htdocs/webproject/images/logo.jpg">
+            <h2>Farm Fresh Picks</h2>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="Search...">
+            <button type="submit" id="search-button">Search</button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html" class="btnlogin-popup">Login</a></li>
+        </ul>
+        <div class="header-right">
+            <div class="header-right">
+                <div class="cart-container">
+                    <button class="cart-icon" id="cart-icon" aria-label="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count">0</span>
+                    </button>
+                    <div class="cart-items" id="cart-items">
+                        <ul id="cart-item-list"></ul>
+                        <button id="checkout-button" style="display: none;">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <h1>Checkout</h1>
+    <div class="cart-items">
+        <!-- Display cart items here -->
+    </div>
+    <div class="payment-options">
+        <h2>Payment Options</h2>
+        <div class="option">
+            <input type="radio" id="credit-card" name="payment-method" value="credit-card" checked>
+            <label for="credit-card">
+                <i class="fas fa-credit-card"></i> Credit/Debit Card
+            </label>
+        </div>
+        <div class="option">
+            <input type="radio" id="paypal" name="payment-method" value="paypal">
+            <label for="paypal">
+                <i class="fab fa-paypal"></i> PayPal
+            </label>
+        </div>
+        <div class="option">
+            <input type="radio" id="apple-pay" name="payment-method" value="apple-pay">
+            <label for="apple-pay">
+                <i class="fab fa-apple-pay"></i> Apple Pay
+            </label>
+        </div>
+    </div>
+    <div id="payment-form">
+        <div id="credit-card-form" class="payment-form">
+            <div id="payment-element">
+                <!-- Stripe.js will render the payment input fields here -->
+            </div>
+            <button id="submit-payment">Pay</button>
+        </div>
+        <div id="paypal-form" class="payment-form" style="display: none;">
+            <!-- PayPal integration placeholder -->
+            <p>You will be redirected to PayPal to complete your payment.</p>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col">
+                <h3>Copy of Rights</h3>
+                <p>&copy; 2023 Farm Fresh Picks. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Include your JavaScript file -->
+<script src="script.js"></script>
+<script>
+    // Initialize Stripe.js
+    const stripe = Stripe('your_publishable_key');
+    const elements = stripe.elements();
+
+    // Create a Payment Element
+    const paymentElement = elements.create('payment');
+    paymentElement.mount('#payment-element');
+
+    // Handle payment option change
+    const paymentOptions = document.querySelectorAll('input[name="payment-method"]');
+    const creditCardForm = document.getElementById('credit-card-form');
+    const paypalForm = document.getElementById('paypal-form');
+
+    paymentOptions.forEach(option => {
+      option.addEventListener('change', () => {
+        if (option.value === 'credit-card') {
+          creditCardForm.style.display = 'block';
+          paypalForm.style.display = 'none';
+        } else if (option.value === 'paypal') {
+          creditCardForm.style.display = 'none';
+          paypalForm.style.display = 'block';
+        } else {
+          creditCardForm.style.display = 'none';
+          paypalForm.style.display = 'none';
+        }
+      });
+    });
+
+    // Handle form submission for credit card
+    const form = document.getElementById('credit-card-form');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      // Create a PaymentMethod object from the Payment Element
+      const { error } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: paymentElement,
+        billing_details: {
+          // Collect billing details here
+        },
+      });
+
+      if (error) {
+        // Handle payment error
+        console.error(error);
+      } else {
+        // Payment successful, handle the payment on the server-side
+        console.log('Payment successful!');
+      }
+    });
+  </script>
+</body>
+</html>
