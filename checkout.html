@@ -45,7 +45,7 @@
 <div class="container">
     <h1>Checkout</h1>
     <div class="cart-items">
-        <!-- Display cart items here -->
+      
     </div>
     <div class="payment-options">
         <h2>Payment Options</h2>
@@ -71,12 +71,12 @@
     <div id="payment-form">
         <div id="credit-card-form" class="payment-form">
             <div id="payment-element">
-                <!-- Stripe.js will render the payment input fields here -->
+               
             </div>
             <button id="submit-payment">Pay</button>
         </div>
         <div id="paypal-form" class="payment-form" style="display: none;">
-            <!-- PayPal integration placeholder -->
+           
             <p>You will be redirected to PayPal to complete your payment.</p>
         </div>
     </div>
@@ -91,18 +91,18 @@
         </div>
     </div>
 </footer>
-<!-- Include your JavaScript file -->
+
 <script src="script.js"></script>
 <script>
-    // Initialize Stripe.js
+    
     const stripe = Stripe('your_publishable_key');
     const elements = stripe.elements();
 
-    // Create a Payment Element
+    
     const paymentElement = elements.create('payment');
     paymentElement.mount('#payment-element');
 
-    // Handle payment option change
+    
     const paymentOptions = document.querySelectorAll('input[name="payment-method"]');
     const creditCardForm = document.getElementById('credit-card-form');
     const paypalForm = document.getElementById('paypal-form');
@@ -132,7 +132,7 @@
         type: 'card',
         card: paymentElement,
         billing_details: {
-          // Collect billing details here
+          
         },
       });
 
@@ -140,7 +140,7 @@
         // Handle payment error
         console.error(error);
       } else {
-        // Payment successful, handle the payment on the server-side
+        // Payment successful
         console.log('Payment successful!');
       }
     });
