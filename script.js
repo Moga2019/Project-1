@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const checkoutButton = document.getElementById("checkout-button");
   const cartIcon = document.getElementById("cart-icon");
 
-  // Event listener for the cart icon
+  
   cartIcon.addEventListener("click", function () {
     cartItemsContainer.style.display = cartItemsContainer.style.display === "block" ? "none" : "block";
   });
