@@ -14,7 +14,7 @@
 <header>
     <div class="header-content">
         <div class="logo">
-            <img src="/Applications/XAMPP/xamppfiles/htdocs/webproject/images/logo.jpg" alt="Farm Fresh Picks Logo">
+            <img src="/Applications/XAMPP/xamppfiles/htdocs/webproject/images/logo.jpg">
             <h2>Farm Fresh Picks</h2>
         </div>
         <div class="search">
@@ -167,7 +167,7 @@
         let existingItem = cart.find(item => item.id === productId);
 
         if (existingItem) {
-            // Increase quantity if item exists
+          
             existingItem.quantity += 1;
         } else {
 
@@ -198,7 +198,7 @@
         // Update cart count
         document.getElementById("cart-count").innerText = totalCount;
 
-        // Show or hide the checkout button
+        
         document.getElementById("checkout-button").style.display = totalCount > 0 ? "block" : "none";
     }
 
